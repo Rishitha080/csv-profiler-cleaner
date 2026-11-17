@@ -1,6 +1,9 @@
-name,age,salary,city
-Asha,21,30000,Hyderabad
-Ravi,22,35000,Vijayawada
-Asha,21,30000,Hyderabad
-Kiran,,40000,Bhimavaram
-Meena,23,,Hyderabad
+name,age,city,department,notes
+Asha,21,Hyderabad,IT,"Works in data, analytics"
+Ravi,24,Vijayawada,HR,"Handles payroll"
+Kiran,,Hyderabad,IT,"Joined recently"
+Meena,26,,IT,"Works remotely"
+Asha,21,Hyderabad,IT,"Works in data, analytics"
+Sana,24,Hyderabad,HR,"Uses Excel, SQL"
+Arjun,,Vijayawada,IT,"Needs data cleaning"
+Priya,24,Hyderabad,HR,"Reports, dashboards"
