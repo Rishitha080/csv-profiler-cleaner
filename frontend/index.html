@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Data Profiler & Cleaner</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <nav class="topbar">
+        <a href="/" class="brand">CSV <span>Profiler</span></a>
+        <span class="tag">Data Analysis & Cleaning Tool</span>
+    </nav>
+
+    <main class="container">
+
+        <section class="hero">
+            <p class="eyebrow">DATA QUALITY TOOL</p>
+            <h1>Understand your <span>CSV data.</span></h1>
+            <p class="subtitle">
+                Analyze, understand and clean your CSV files in seconds.
+            </p>
+        </section>
+
+        <!-- Upload -->
+        <section class="panel">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Upload CSV File</h2>
+                    <p class="muted">Select a CSV file to get started.</p>
+                </div>
+                <span class="step">01</span>
+            </div>
+
+            <label for="fileInput" class="dropzone" id="dropzone">
+                <div class="upload-icon">↑</div>
+                <strong id="fileName">Choose a CSV file</strong>
+                <span>Click here or drag and drop your file</span>
+                <small>CSV format · Maximum size 5 MB</small>
+            </label>
+
+            <input type="file" id="fileInput" accept=".csv">
+
+            <button class="primary-btn" id="profileBtn">
+                Analyze Dataset
+            </button>
+
+            <p class="status" id="status"></p>
+
+        </section>
+
+
+        <!-- Original Analysis -->
+        <section id="results" hidden>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Dataset Overview</h2>
+                    <p class="muted" id="filename"></p>
+                </div>
+                <span class="step">02</span>
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span>Total Rows</span>
+                    <strong id="rowCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Total Columns</span>
+                    <strong id="columnCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Missing Values</span>
+                    <strong id="missingCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Duplicate Rows</span>
+                    <strong id="duplicateCount">0</strong>
+                </div>
+
+            </div>
+
+
+            <section class="panel">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Column Information</h2>
+                        <p class="muted">Details about each column.</p>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Column Name</th>
+                                <th>Data Type</th>
+                                <th>Missing Values</th>
+                            </tr>
+                        </thead>
+                        <tbody id="columnTable"></tbody>
+                    </table>
+                </div>
+
+            </section>
+
+
+            <section class="panel">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Original Data Preview</h2>
+                        <p class="muted">First five rows of your original dataset.</p>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead id="previewHead"></thead>
+                        <tbody id="previewBody"></tbody>
+                    </table>
+                </div>
+
+            </section>
+
+
+            <!-- Cleaning Options -->
+            <section class="panel">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Clean Your Dataset</h2>
+                        <p class="muted">
+                            Choose how you want to handle data quality issues.
+                        </p>
+                    </div>
+                    <span class="step">03</span>
+                </div>
+
+                <label class="check-option">
+                    <input type="checkbox" id="removeDuplicates">
+
+                    <span>
+                        <strong>Remove duplicate rows</strong>
+                        <small>Remove repeated records from your dataset.</small>
+                    </span>
+                </label>
+
+                <div class="field">
+                    <label for="missingStrategy">
+                        Handle Missing Values
+                    </label>
+
+                    <select id="missingStrategy">
+                        <option value="none">Do nothing</option>
+                        <option value="drop_rows">
+                            Remove rows with missing values
+                        </option>
+                        <option value="mean">
+                            Fill numeric missing values with mean
+                        </option>
+                        <option value="median">
+                            Fill numeric missing values with median
+                        </option>
+                        <option value="mode">
+                            Fill missing values with mode
+                        </option>
+                    </select>
+                </div>
+
+                <button class="primary-btn" id="cleanBtn">
+                    Clean Dataset
+                </button>
+
+                <p class="status" id="cleanStatus"></p>
+
+            </section>
+
+
+            <!-- Cleaned Data Preview -->
+            <section class="panel" id="cleanedResults" hidden>
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Cleaned Dataset Preview</h2>
+                        <p class="muted">
+                            Review your cleaned data before downloading.
+                        </p>
+                    </div>
+                    <span class="step">04</span>
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <span>Original Rows</span>
+                        <strong id="originalRows">0</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>Cleaned Rows</span>
+                        <strong id="cleanedRows">0</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>Duplicates Removed</span>
+                        <strong id="duplicatesRemoved">0</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>Missing Values Left</span>
+                        <strong id="missingRemaining">0</strong>
+                    </div>
+
+                </div>
+
+
+                <h2>Review Cleaned Data</h2>
+
+                <p class="muted">
+                    Showing the first 10 rows of your cleaned dataset.
+                </p>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead id="cleanedPreviewHead"></thead>
+                        <tbody id="cleanedPreviewBody"></tbody>
+                    </table>
+                </div>
+
+                <button class="primary-btn" id="downloadButton" hidden>
+                    Download Cleaned CSV
+                </button>
+
+                <p class="status" id="downloadStatus"></p>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <footer>
+        CSV Data Profiler & Cleaner
+    </footer>
+
+    <script src="/static/script.js"></script>
+
+</body>
+</html>
